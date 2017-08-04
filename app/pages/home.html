@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-xs-12">
+        <table id="pedidos" class="table">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                    <th>Criado</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<script src="js/moment.min.js"></script>
+<script>
+(function() {
+    function loadPedidos(callback) {
+        return $.ajax({
+            url: env.api+'/pedidos', 
+            method: 'GET',
+            success: function(d) {
+                console.log(d);
+                callback(d);
+            },
+            error: onError
+        });
+    }
+
+    function populateTable(d) {
+        var $tbody = $('#pedidos tbody');
+        $tbody.empty();
+
+        d.forEach(function(element) {
+            $tbody.append(drawRow(element))
+                  .append(drawItens(element.itens));
+        }, this);
+    }
+
+    function drawRow(item) {
+        return $('<tr />').append(
+            $('<td />').text(item.cliente)
+        ).append(
+            $('<td />').text( item.total )
+        ).append(
+            $('<td />').text(moment(item.created).format('DD/MM/YYYY HH:mm'))
+        )
+    }
+
+    function drawItens(itens) {
+        var $tr = $('<tr />');
+        var $table = $('<table />', {class:'table'});
+        $table.append($('<tr />').html('<th>Produto</th><th>Valor</th>'));
+        itens.forEach(function(item) {
+            $table.append(
+                $('<tr />').append(
+                    $('<td />', {class:'produto', 'data-pid':item.produto}).text(item.produto)
+                ).append(
+                    $('<td />').text(item.valor)
+                )
+            )
+        }, this);
+        $tr.append($table);
+        return $tr;
+    }
+
+    loadPedidos(populateTable);
+
+})()
+</script>

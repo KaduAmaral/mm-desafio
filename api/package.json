@@ -1,0 +1,29 @@
+{
+  "name": "mm-desafio",
+  "version": "1.0.0",
+  "description": "Desafio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaduAmaral/mm-desafio.git"
+  },
+  "author": "Carlos Amaral",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaduAmaral/mm-desafio/issues"
+  },
+  "homepage": "https://github.com/KaduAmaral/mm-desafio#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
